@@ -1,4 +1,98 @@
+---
 
+## [2026-04-19] ingest | Summer 2026 RV Camping Trip — Complete Route Planning
+
+**Type:** Travel Planning + Logistics — COMPLETED ✅
+**Impact:** Personal — 91-day cross-country RV trip fully planned and documented
+**Reporter:** Wayne LeDrew
+
+### Trip Overview
+
+**91-day RV adventure** across 4 Canadian provinces with Jasmine:
+- **Start:** May 28, 2026 (Kitchener, ON)
+- **End:** August 26, 2026 (Hamilton, ON)
+- **Distance:** ~8,683 km
+- **Vehicle:** Diesel truck + 30ft travel trailer
+- **Total stops:** 21 campgrounds + 7 travel stops
+
+### Route Summary
+
+**Outbound:** Kitchener → Sault Ste Marie → Terrace Bay → Dryden → Manitoba → Saskatchewan → Alberta
+**Prairie Loop:** Regina → Cypress Hills → Waterton → Bow Valley → Banff → Lake Louise → William Switzer → Miquelon Lake → Vermilion → Saskatchewan Landing → Manitoba
+**Return:** Asessippi → Grand Beach → Quetico → Marathon → Sault Ste Marie → Piotr's Cottage → Hamilton
+
+### Reservations Confirmed (10 bookings)
+
+| Park | Dates | Reservation # |
+|------|-------|---------------|
+| Cypress Hills PP | Jun 3-7 | 2-1353345 |
+| Crooked Creek Campground | Jun 7-14 | CRO-26-1082 |
+| Bow Valley PP | Jun 14-18 | 2-1357950 |
+| Tunnel Mountain Village II | Jun 18-26 | INPC25-15795597B1 |
+| Lake Louise Hard-Sided | Jun 26-Jul 4 | INPC25-15803320B2 |
+| William Switzer PP | Jul 4-10 | 2-1378073 |
+| Miquelon Lake PP | Jul 10-17 | 2-1383600 |
+| Vermilion PP | Jul 17-24 | INMB26-83429B1 |
+| Saskatchewan Landing PP | Jul 24-31 | 2-2044209 |
+| Asessippi PP | Jul 31-Aug 4 | INMB26-289278B1 |
+| Grand Beach PP | Aug 4-7 | INMB26-83429B1 |
+| Quetico PP | Aug 7-14 | INOP25-18658994B1 |
+
+**All reservations confirmed** — RVlife export imported and cross-checked.
+
+### Fuel Planning — Diesel Route
+
+**50 exact fuel stops** mapped from Kitchener to Hamilton:
+- **Critical stops:** Wawa, Terrace Bay, Pincher Creek, Canmore (avoid Banff prices!), Saskatoon, Atikokan
+- **Budget:** ~$3,000-3,500 CAD for ~2,042L diesel
+- **Longest legs:** SK Landing → Asessippi (586km), Grand Beach → Quetico (636km)
+
+**Price strategy by province:**
+- Alberta: Cheapest (~$1.50-1.65/L) — fill big here
+- Saskatchewan: Cheap (~$1.55-1.70/L)
+- Manitoba: Moderate (~$1.60-1.75/L)
+- Ontario: Most expensive (~$1.75-1.95/L)
+- Banff/Lake Louise: AVOID (~$1.90-2.10/L)
+
+### Key Stops
+
+**Longest stays:**
+1. Piotr's Cottage (Georgian Bay) — 10 nights (Aug 16-26)
+2. Tunnel Mountain Village II (Banff) — 8 nights
+3. Lake Louise Hard-Sided — 8 nights
+
+**Walmart overnights:** 7 nights (Sault Ste, Dryden, Portage la Prairie x2, Regina)
+
+### Deliverables Created
+
+**Project folder:** `projects/camping-2026/`
+- `README.md` — Project overview
+- `itinerary.md` — Complete day-by-day schedule
+- `reservations.md` — All booking reference numbers
+- `diesel-stops.md` — Exact station names & addresses (50 stops)
+
+**Memory files:**
+- `memory/summer-2026-camping-trip.md` — Full itinerary
+- `memory/summer-2026-camping-trip-fuel-plan.md` — Strategic fuel planning
+- `memory/summer-2026-camping-trip-diesel-stops.md` — Exact stops
+
+**Wiki:**
+- New concept page: `camping-2026-trip.md` — Trip summary for reference
+- Updated index with new concept entry
+
+### Pre-Trip Checklist (Upcoming)
+
+- [ ] Vehicle inspection (diesel truck + trailer)
+- [ ] DEF level check
+- [ ] Packing list from previous trips
+- [ ] Offline maps downloaded
+- [ ] Confirm reservation emails printed/saved
+
+### Related
+
+- Concept page: [camping-2026-trip](./wiki/concepts/camping-2026-trip.md)
+- Project: `projects/camping-2026/`
+- Memory: `memory/summer-2026-camping-trip*.md`
 
 ---
 
