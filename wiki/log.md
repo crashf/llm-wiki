@@ -2,6 +2,103 @@
 
 ---
 
+## [2026-04-19] ingest | Anzen Egress + MikroWizard Features Integration Planning
+
+**Type:** Architecture Planning + Documentation — COMPLETED ✅
+**Impact:** Strategic — 6-week roadmap for operational capabilities in Anzen Egress portal
+**Reporter:** Wayne LeDrew (CTO, Pund-IT)
+
+### Work Completed
+
+Reviewed [MikroWizard](https://github.com/MikroWizard/mikroman) (MikroTik management platform) for feature integration into Anzen Egress.
+
+**Analysis of 7 operational features:**
+| Feature | Decision | Rationale |
+|---------|----------|-----------|
+| Device Health Metrics | ✅ Add | CPU/Memory visibility per deployment for troubleshooting |
+| Config Backup & Restore | ✅ Add | Rollback safety before upgrades |
+| Firmware Management (Safe Updates) | ✅ Add | Security risk mitigation with auto-rollback |
+| Syslog Viewer | ✅ Add | Per-deployment log aggregation |
+| Scheduled Maintenance Tasks | ✅ Add | Automated daily backups, weekly checks |
+| Diagnostics Terminal | ✅ Add | Safe command execution (ping, traceroute, etc.) |
+| NOC Dashboard (fleet-wide) | ❌ Skip | Out of scope — use Grafana for 24/7 monitoring |
+| Device Groups & Batch Ops | ❌ Skip | Egress is 1:1 customer:CPE, no bulk ops needed |
+| RADIUS Server | ❌ Skip | Not applicable to egress tunnels |
+
+### Deliverables Created
+
+1. **MIKROWIZARD-INTEGRATION-MINIMAL.md** (13 KB)
+   - 6-week implementation plan
+   - 6 phases: Health → Syslog → Backups → Firmware → Tasks → Diagnostics
+   - 8 new database tables
+   - Scope: Per-deployment only (no fleet-wide features)
+
+2. **MIKROWIZARD-FEATURES-PLAN.md** (28 KB)
+   - Full 10-week comprehensive plan (for reference)
+   - Complete schema, API endpoints, UI structure
+   - 20+ tables, NOC dashboard, fleet operations
+
+3. **TODO.md** (4.6 KB)
+   - Task breakdown with checkboxes
+   - API endpoint mapping
+   - Database schema summary
+
+4. **Wiki Updated**
+   - New concept page: `anzen-egress-mikrowizard.md`
+   - Added to wiki index
+
+### Implementation Timeline
+
+| Phase | Feature | Duration |
+|-------|---------|----------|
+| 1 | Device Health Metrics | Week 1 |
+| 2 | Syslog Viewer | Week 1 |
+| 3 | Config Backup & Restore | Week 2 |
+| 4 | Firmware Management | Week 2 |
+| 5 | Scheduled Tasks | Week 1 |
+| 6 | Diagnostics Terminal | Week 1 |
+| | Integration & Polish | Week 1 |
+| **Total** | | **6 weeks** |
+
+### Database Schema Summary
+
+**New tables (8 total):**
+- `device_health_metrics` — CPU/Memory snapshots
+- `device_syslog` — Log aggregation
+- `device_backups` — Config backups
+- `firmware_repository` — Cached firmware versions
+- `device_firmware_status` — Current vs available
+- `firmware_upgrade_history` — Upgrade attempts
+- `scheduled_tasks` — Recurring maintenance
+- `task_executions` — Run history
+
+### Git Operations
+
+- **Anzen Egress Portal:** Pushed 3 new markdown files to `crashf/anzen-egress-portal`
+- **LLM Wiki:** Synced concept page to `crashf/llm-wiki`
+- **Live Server:** Copied TODO.md to punsvndocker02 (10.255.71.48)
+
+### UI Changes
+
+**Deployment Detail page gets 5 new tabs:**
+```
+[Overview] [Health] [Logs] [Backups] [Firmware] [Tasks] [Diagnostics] [History]
+```
+
+### Key Decisions
+
+- **Keep scope minimal:** Added 6 features, rejected 4 (fleet-wide features)
+- **Per-deployment only:** No global NOC dashboard, no bulk operations
+- **Safe by default:** Firmware upgrades have automatic rollback on failure
+- **6 weeks vs 10 weeks:** Saved 4 weeks by cutting fleet-wide features
+
+### Related Concepts
+
+- [Anzen Egress Infrastructure](wiki/concepts/anzen-egress-mikrowizard.md) — Full integration details
+- [Anzen Egress GitHub](https://github.com/crashf/anzen-egress-portal) — Portal repo
+
+---
+
 ## [2026-04-18] ingest | Club Sixty Six — Squarespace Billing Migration COMPLETE
 
 **Type:** Data Migration + Feature Deployment — COMPLETED ✅
