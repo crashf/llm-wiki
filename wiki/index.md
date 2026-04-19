@@ -12,6 +12,7 @@ _(Ideas, techniques, patterns, methodologies)_
 
 | Page | Summary | Tags | Updated |
 |------|---------|------|---------|
+| [anzen-egress-mikrowizard](./concepts/anzen-egress-mikrowizard.md) | Integration of MikroWizard features into Anzen Egress portal — health, firmware, backups, syslog, diagnostics | anzen-egress, mikrowizard, mikrotik, wireguard, device-management | 2026-04-19 |
 | [voice-interface-web](./concepts/voice-interface-web.md) | Real-time voice interface for OpenClaw agents — Deepgram STT, ElevenLabs TTS, WebSocket | voice, stt, tts, deepgram, elevenlabs, openclaw, websocket | 2026-04-16 |
 | [github-credentials](./concepts/github-credentials.md) | GitHub PAT and authentication patterns for crashf repositories | github, credentials, pat, authentication | 2026-04-10 |
 | [cpanel-whm-skill](./concepts/cpanel-whm-skill.md) | cPanel/WHM API skill for account, email, database, DNS, SSL, and domain management | cpanel, whm, api, skill, infrastructure | 2026-04-10 |
