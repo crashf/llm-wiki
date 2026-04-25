@@ -1,5 +1,37 @@
 ---
 
+## [2026-04-25] ops | Anzen Egress Portal Review + CPE Power-Outage Recovery
+
+**Type:** Operations — COMPLETED ✅
+**Reporter:** Adrianna
+
+### Tasks Completed
+1. **Anzen Egress Portal Review**
+   - Read `PLAN.md`, `TRACKER.md`, `DEPLOYMENT-NOTES.md`
+   - Status: Phase 8 complete, deployed at `https://anzenegress.pund-it.ca`
+   - Confirmed all 8 build phases done: Foundation → IPAM → ConnectWise → CPE Pre-Stage → Deployment Wizard → Monitoring → Polish → Live Deployment
+   - Noted open gaps: deploy button UI intermittency, rollup automation cron missing, detail action stubs, decommission incomplete, admin placeholders
+
+2. **CPE Troubleshooting — Wayne Trailer Power Outage**
+   - **Symptom:** Tunnel last handshake ~8:46 AM; no transit reachability from edge after morning power outage
+   - **Diagnosis (edge-only, no DC changes):**
+     - Edge WG interfaces running, firewall open
+     - CPE clock showed 10:04 UTC vs actual ~22:25 UTC (12h drift after power loss)
+     - NTP client enabled but **no servers configured**
+   - **Root cause:** WG crypto handshake sequence counters failed due to clock drift post-power-loss. NTP wasn't configured with any servers, so the CPE never resynced.
+   - **Fix:** Wayne added `0.pool.ntp.org`, `1.pool.ntp.org`, `2.pool.ntp.org` to CPE NTP client; clock corrected; tunnels re-established within minutes.
+   - **Verification:**
+     - Transit `10.99.0.2`: 0% loss, ~40–75ms RTT from edge
+     - Customer IP `170.205.18.225`: 0% loss, ~50–64ms RTT via `anzen` routing-table
+     - New WAN IP from Starlink CGNAT rotation (129.222.193.42 → 143.105.15.97) — WG handled seamlessly
+
+### Lessons
+- Starlink + CGNAT + WG is resilient to IP changes; clock drift is the real enemy post-outage.
+- All CPE configs should include explicit NTP servers and consider `persistent-keepalive` as a health indicator but not a substitute for stable time.
+- The `.rsc` bootstrap config should include NTP server assignment (currently does not).
+
+---
+
 ## [2026-04-24] build | Mac Studio — MiniMax-M2.7 Added to Ollama (131B model)
 
 **Type:** Model Deployment — COMPLETED ✅
