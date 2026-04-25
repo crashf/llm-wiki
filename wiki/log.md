@@ -53,6 +53,27 @@ PARAMETER num_ctx 8192
 ### Files Changed
 - `projects/mac_studio_deployment/STATUS.md` — updated with model status
 
+
+## [2026-04-25] investigate | Club Sixty Six Transcode Timeout Fix
+
+**Type:** Investigation & Fix — COMPLETED ✅
+
+**Context:** Olivia reported video uploads stuck in "awaiting transcode" state. 3 videos in `pending` status.
+
+**Root cause:** `TRANSCODE_TIMEOUT_MS` hardcoded to 10 minutes (`600000ms`). 20-25 minute videos on loaded VM (load avg 20) take ~15-20 min for 1080p. Sequential transcoding → 1080p always hits the 10-min wall.
+
+**Fix deployed:**
+- `src/lib/transcode.ts` line 16: `10 * 60 * 1000` → `60 * 60 * 1000` (1 hour)
+- Built and deployed via `deploy.sh` — immediate HTTP 200
+
+**Post-fix — manual re-transcoding:**
+- Wrote `retranscode.sh` using direct ffmpeg calls (no Node.js/Prisma client issues)
+- All 3 videos processed sequentially (360p → 720p → 1080p + master playlist each)
+- DB updated: `transcodeStatus` = `completed`, `storagePath` = HLS master.m3u8
+- All 3 completed successfully
+
+**Related:** OOM transcode incident (2026-04-13), sequential transcoding fix, PM2 OOM restart loop
+
 ---
 
 ## [2026-04-22] fix | Brad's Bot (.171) — OpenClaw .21 Upgrade: Google Chat JWT Patch + plugins.entries Fix
