@@ -12,6 +12,8 @@ _(Ideas, techniques, patterns, methodologies)_
 
 | Page | Summary | Tags | Updated |
 |------|---------|------|---------|
+| [anker-solix-f3000-mqtt](./concepts/anker-solix-f3000-mqtt.md) | Anker SOLIX F3000 MQTT protocol — field mapping, decoding bugs, Grafana dashboard, 39 confirmed live fields | anker, f3000, mqtt, iot, grafana, power-station | 2026-04-26 |
+|------|---------|------|---------|
 | [camping-2026-trip](./concepts/camping-2026-trip.md) | Summer 2026 RV camping trip — 91 days, 4 provinces, 50 diesel stops, fully booked | camping, rv, travel, diesel, planning | 2026-04-19 |
 | [anzen-egress-portal](./concepts/anzen-egress-portal.md) | Zero-CLI deployment portal for Anzen Egress WireGuard tunnels — 3-phase model, tech stack, DB schema, integrations | anzen-egress, mikrotik, wireguard, nextjs, postgresql, portal | 2026-04-23 |
 | [anzen-egress-wireguard](./concepts/anzen-egress-wireguard.md) | WireGuard architecture — production/staging split, X25519 key gen, transit networks, proxy-ARP /30 handoff, tunnel lifecycle | anzen-egress, wireguard, x25519, mikrotik, proxy-arp | 2026-04-23 |
@@ -47,4 +49,4 @@ _No synthesis pages yet._
 
 ---
 
-**Stats:** 2 sources | 11 concept pages | 2 summaries | Last updated: 2026-04-23
+**Stats:** 2 sources | 11 concept pages | 2 summaries | Last updated: 2026-04-26

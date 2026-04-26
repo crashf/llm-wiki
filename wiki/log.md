@@ -1,5 +1,58 @@
 ---
 
+## [2026-04-26] ops | Anker SOLIX F3000 MQTT Field Fix + Grafana Dashboard
+
+**Type:** Engineering / IoT — COMPLETED ✅
+
+**What:** Fixed missing AC input/output power fields in F3000 MQTT poller and built a comprehensive 36-panel Grafana dashboard with all 39 live fields.
+
+**Root cause:** `mqttmap.py` field names had `?` suffixes (e.g. `ac_input_power?`) as developer uncertainty markers. `apibase.py` filter lists used exact names without `?` → fields silently discarded during decoding.
+
+**Fix:**
+- Patched `mqttmap.py` to strip `?` suffixes via `patch_mqttmap.py`
+- Patched `apibase.py` to normalize field names during filter checks
+- Added missing DB columns (`usbc_1-4_status`, `usba_1-2_status`, `dc_12v_output_mode`, `display_switch`, `port_memory_switch`)
+- Updated `f3000_to_postgres.py` for full 39-field extraction
+
+**Dashboard:** http://10.255.61.20:3000/d/f3000-all-fields/ (admin/admin)
+- 36 panels: gauges, boolean stats, integer stats, timeseries history
+- All AC/DC/USB power metrics + device settings + history charts
+
+**Files:** `projects/anker-f3000/anker-solix-api/{mqttmap.py,apibase.py,f3000_to_postgres.py}`
+**Exported dashboard:** `projects/anker-f3000/grafana/f3000-all-fields-dashboard.json`
+
+### [2026-04-26 PM] F3000 Energy Cost Tracking — Enova Power TOU
+
+**Type:** Engineering / IoT Cost Tracking — COMPLETED ✅
+
+**What:** Built a PostgreSQL-based energy cost engine that aggregates minute-level power data into hourly kWh and applies Enova Power (Kitchener-Waterloo) TOU rates.
+
+**Rate schedule (Enova Power TOU):**
+- **On-peak:** 7 AM–11 AM, 5 PM–7 PM weekdays → 18.2¢/kWh
+- **Mid-peak:** 11 AM–5 PM weekdays → 12.2¢/kWh
+- **Off-peak:** Weekends, holidays, 7 PM–7 AM → 9.8¢/kWh
+- Summer: May 1–Oct 31 | Winter: Nov 1–Apr 30
+- Automatic Ontario holiday detection via `holidays` library
+
+**Engine:** `projects/anker-f3000/anker-solix-api/f3000_cost_engine.py`
+- Table: `f3000_energy_hourly` with `cost_cents`, `ac_input_kwh`, `solar_input_kwh`, `savings_from_solar_cents`
+- Timezone-aware UTC → America/Toronto conversion for correct rate classification
+- Systemd timer: `f3000-cost.timer` (runs every hour at :05)
+
+**Dashboard panels ready:** `projects/anker-f3000/grafana/cost-panels.json`
+- Today's cost stat | Today's solar savings stat | This hour cost stat
+- Energy source mix pie chart (AC vs solar)
+- Hourly cost trend (7 days) | Daily cost bar gauge (14 days)
+- ✅ **Imported and live at:** `http://10.255.61.20:3000/d/d0458a24-e129-4f8e-814d-f400dcabef89/anker-solix-f3000-energy-cost`
+- ⚠️ Grafana API auth worked on retry — dashboard confirmed with 6 panels
+
+**Files:** `projects/anker-f3000/anker-solix-api/f3000_cost_engine.py`
+**Timer:** `projects/anker-f3000/{f3000-cost.service,f3000-cost.timer}`
+**Cost dashboard JSON:** `projects/anker-f3000/grafana/cost-panels.json`
+**Full session docs:** `projects/anker-f3000/docs/work-log-2026-04-26.md`
+
+---
+
 ## [2026-04-25] ops | Anzen Egress Portal Review + CPE Power-Outage Recovery
 
 **Type:** Operations — COMPLETED ✅
