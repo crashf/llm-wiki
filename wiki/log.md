@@ -156,3 +156,35 @@ Ran `openclaw update` on .171 to pull latest .21 version. Google Chat stopped re
 
 **LLM Wiki updated:**
 - New concept: `openclaw-421-upgrade.md` — full upgrade procedure
+
+---
+
+## [2026-04-25] build | Anker SOLIX F3000 — Grafana Dashboards Created
+
+**Type:** Monitoring Setup — IN PROGRESS 🔄
+**Reporter:** Adrianna
+
+### Tasks Completed
+1. **Database Setup**
+   - PostgreSQL container (`anker-postgres:15-alpine`) running with `anker` db
+   - Table `f3000_metrics` with 39 columns for all confirmed live MQTT fields
+   - Index on `(device_sn)` and `(timestamp DESC, device_sn)`
+
+2. **Poller Script**
+   - `f3000_to_postgres.py` subscribes to Anker MQTT broker via `SolixMqttDevicePps`
+   - Writes confirmed live fields only: `output_power_total`, `temperature`, `battery_soc`, `ac_input_limit`, `ac_output_power_switch`, etc.
+   - Systemd timer runs every 60 seconds (`f3000-monitor.timer`)
+
+3. **Grafana Dashboards**
+   - Datasource `anker-postgres` configured (UID: `efk5jsmhf4t8gd`)
+   - Created `flux-capacitor-v2` dashboard with 11 panels (gauges, stats, time series, table)
+   - Created `HARDCODED DB CHECK` dashboard with explicit device SN in queries (no variables)
+   - All API queries return correct data (e.g., ~1867W output power, 21°C)
+
+### Blocker / Issue
+- Grafana browser render shows dramatically different values from API/backend:
+  - API returns output_power_total ~1867W, but dashboard gauge shows ~93W
+  - Temperature history graph shows 62–85°C range instead of constant ~21–25°C
+  - Boolean fields show numeric values (31.8, 72.5) instead of ON/OFF
+  - Troubleshooting: no other databases, datasources, or tables found; no transformations configured; hardcoded queries also affected
+  - **Status:** Root cause unidentified. Grafana Explore testing requested to isolate browser vs backend issue.
